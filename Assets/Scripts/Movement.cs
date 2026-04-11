@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Movement : MonoBehaviour
 {
     public float speed;
+    private float _intialSpeed;
     private Rigidbody2D rb;
     
     private Vector2 movement;
@@ -16,23 +17,12 @@ public class Movement : MonoBehaviour
     void Start() 
     {
         rb = GetComponent<Rigidbody2D>();
+        _intialSpeed = speed;
     }
     
     void Update() 
     {
         movement = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        
-        // FlipSprite();
-        
-        // if (lightPlacementInstance.gameStart)
-        // {
-        //     if(!pauseDepletion)
-        //         _health -= _healthDepletionRate * Time.deltaTime;
-        //     else
-        //     {
-        //         _health += _healthDepletionRate * Time.deltaTime;
-        //     }
-        // }
     }
     
     void FixedUpdate() 
@@ -41,22 +31,26 @@ public class Movement : MonoBehaviour
 
         if (movement != Vector2.zero) 
         {
-            // Hareket yönüne göre açıyı hesapla (Radyan -> Derece)
             float angle = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg;
-
-            /* Unity'de 0 derece sağa (X ekseni) bakar.
-               Eğer senin üçgeninin "önü" yukarı bakıyorsa,
-               hesaplanan açıdan 90 derece çıkarman gerekir.
-            */
             rb.rotation = angle - 90f; 
         }
     }
+    
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.CompareTag("Traffic Mid Friction")) {
+            speed = _intialSpeed * 0.5f;
+        }
+        else if (other.CompareTag("Traffic High Friction")) {
+            speed = _intialSpeed * 0.25f;
+        }
+        else if (other.CompareTag("Traffic Low Friction")) {
+            speed = _intialSpeed * 0.75f;
+        }
+    }
 
-    // private void FlipSprite()
-    // {
-    //     if (movement.x > 0)
-    //         transform.localScale = new Vector3(1, 1, 1);
-    //     else if (movement.x < 0)
-    //         transform.localScale = new Vector3(-1, 1, 1);
-    // }
+    private void OnTriggerExit2D(Collider2D other) {
+        if (other.CompareTag("Traffic Mid Friction") || other.CompareTag("Traffic High Friction") || other.CompareTag("Traffic Low Friction")) {
+            speed = _intialSpeed;
+        }
+    }
 }
