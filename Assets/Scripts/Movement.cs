@@ -12,7 +12,6 @@ public class Movement : MonoBehaviour
     private Vector2 movement;
     [SerializeField] private GameObject winScreen, loseScreen;
     
-    [SerializeField] private Animator playerAnimator;
     [SerializeField] private TextMeshProUGUI movementCounterText; // UI'daki text objesi
     
     public float movementCounter; // Sürekli artacak olan değer
@@ -21,6 +20,8 @@ public class Movement : MonoBehaviour
     public bool canMove = true;
 
     public bool isOnEndPoint = false;
+
+    [SerializeField] private GameManager gameManager;
     
     void Start() 
     {
@@ -76,6 +77,12 @@ public class Movement : MonoBehaviour
         
         if(other.CompareTag("End Point")) {
             isOnEndPoint = true;
+        }
+        
+        if(other.CompareTag("Waypoint"))
+        {
+            gameManager.waypointPassCounterForCurrentRequest++;
+            Destroy(other.gameObject); // TODO: If you want to reuse requests, consider deactivating instead of destroying
         }
     }
 

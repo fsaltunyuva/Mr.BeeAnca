@@ -8,6 +8,7 @@ TagManager:
   - Traffic Mid Friction
   - Traffic Low Friction
   - End Point
+  - Waypoint
   layers:
   - Default
   - TransparentFX

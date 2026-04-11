@@ -1,7 +1,9 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,10 +23,15 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI calculationText2;
     public TextMeshProUGUI totalMoneyText;
     
+    [Header("Request Dependent")]
     public TextMeshProUGUI currentRequestPriceText;
     public TextMeshProUGUI currentRequestDialogueText;
+    public Image currentRequestPortrait; 
+    public int waypointPassCounterForCurrentRequest = 0;
 
     public GameObject player;
+
+    public int currentRequestCounter = 0;
     
     void Start()
     {
@@ -33,36 +40,48 @@ public class GameManager : MonoBehaviour
     
     public void NewRequest()
     {
-        // Source - https://stackoverflow.com/a/2312911
-        // Posted by Ers, modified by community. See post 'Timeline' for change history
-        // Retrieved 2026-04-11, License - CC BY-SA 2.5
-        int randomIndex = UnityEngine.Random.Range(0, requests.Count);
-        activeRequest = requests[randomIndex];
+        // int randomIndex = UnityEngine.Random.Range(0, requests.Count); // TODO: Consider randomization later
+        activeRequest = requests[currentRequestCounter++];
+        
         activeRequest.gameObject.transform.gameObject.SetActive(true);
+        currentRequestPortrait.sprite = activeRequest.portrait;
         currentRequestPriceText.text = $"{activeRequest.requestPrice}$";
         currentRequestDialogueText.text = activeRequest.dialogue;
         player.transform.position = activeRequest.startPoint.position;
+        movement.canMove = true;
         timer.StartTimer();
     }
 
     private void Update()
     {
-        // detect space
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if(movement.isOnEndPoint)
+            if (movement.isOnEndPoint)
+            {
                 ProcessRecommendedWay();
+            }
+            else
+            {
+                calculationText.text = "<color=red>You haven't reached the destination yet!</color>";
+            }
         }
     }
     
     public void ProcessRecommendedWay()
     {
+        if (waypointPassCounterForCurrentRequest != activeRequest.wayPoints.Count)
+        {
+            currentRequestDialogueText.text = "<color=red>You haven't passed through all the waypoints yet!</color>";
+            StartCoroutine(WaitSomeTimeResetDialogue(3f));
+            return;
+        }
+        
         movement.canMove = false;
         timer.StopTimer();
+        
         float timeTaken = timer.elapsedTime;
         float distancePoint = movement.movementCounter;
         float moneyEarned = Mathf.Max(0, activeRequest.requestPrice - timeTaken * timeConstant - distancePoint * 0.1f);
-        
         AddMoney(moneyEarned);
         
         calculationText.text = $"<color=white>Actual Price: {activeRequest.requestPrice:F1}</color>\n" +
@@ -74,9 +93,22 @@ public class GameManager : MonoBehaviour
         activeRequest.gameObject.SetActive(false);
         timer.ResetTimer();
         movement.ResetMovementCounter();
+        waypointPassCounterForCurrentRequest = 0;
         
         // Start a new request
+        StartCoroutine(WaitSomeTimeAndStartNewRequest(3f));
+    }
+    
+    IEnumerator WaitSomeTimeAndStartNewRequest(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
         NewRequest();
+    }
+    
+    IEnumerator WaitSomeTimeResetDialogue(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        currentRequestDialogueText.text = activeRequest.dialogue;
     }
     
     public void AddMoney(float amount)
