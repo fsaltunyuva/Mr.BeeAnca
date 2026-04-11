@@ -126,10 +126,10 @@ TextureImporter:
       name: village0009_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1024
-        width: 1024
-        height: 1024
+        x: 145
+        y: 1236
+        width: 699
+        height: 719
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -147,10 +147,10 @@ TextureImporter:
       name: village0009_1
       rect:
         serializedVersion: 2
-        x: 1024
-        y: 1024
-        width: 1024
-        height: 1024
+        x: 1059
+        y: 1080
+        width: 895
+        height: 579
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -168,10 +168,10 @@ TextureImporter:
       name: village0009_2
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1024
-        height: 1024
+        x: 102
+        y: 149
+        width: 812
+        height: 685
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -189,10 +189,10 @@ TextureImporter:
       name: village0009_3
       rect:
         serializedVersion: 2
-        x: 1024
-        y: 0
-        width: 1024
-        height: 1024
+        x: 1182
+        y: 437
+        width: 330
+        height: 423
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -202,6 +202,111 @@ TextureImporter:
       bones: []
       spriteID: 70787263b86628248b77f631a6ab5f81
       internalID: 1920135906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: village0009_4
+      rect:
+        serializedVersion: 2
+        x: 1636
+        y: 431
+        width: 335
+        height: 409
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45e80c6eb3ea624458c947cf210904ce
+      internalID: 1617202412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: village0009_5
+      rect:
+        serializedVersion: 2
+        x: 1118
+        y: 108
+        width: 185
+        height: 236
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32689be3265c4c445a89b2c826c5cd7c
+      internalID: 583723414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: village0009_6
+      rect:
+        serializedVersion: 2
+        x: 1366
+        y: 126
+        width: 231
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81580b6bd3476ec468bd5d0aa71a3bed
+      internalID: -243519135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: village0009_7
+      rect:
+        serializedVersion: 2
+        x: 1670
+        y: 125
+        width: 71
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5506edcf3ad958b4da4f9bcd4d4ae100
+      internalID: -873251473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: village0009_8
+      rect:
+        serializedVersion: 2
+        x: 1802
+        y: 111
+        width: 204
+        height: 188
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2e1d33b3c2e621418bf761bc668240f
+      internalID: 497769020
       vertices: []
       indices: 
       edges: []
@@ -221,6 +326,11 @@ TextureImporter:
       village0009_1: 638400164
       village0009_2: 983776537
       village0009_3: 1920135906
+      village0009_4: 1617202412
+      village0009_5: 583723414
+      village0009_6: -243519135
+      village0009_7: -873251473
+      village0009_8: 497769020
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
