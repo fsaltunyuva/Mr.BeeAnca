@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Furkis 2.unity
+    guid: 36e3452a8fa69454da369c14a9044a44
+  - enabled: 1
     path: "Assets/Scenes/Furki\u015F.unity"
     guid: 8c9cfa26abfee488c85f1582747f6a02
   m_configObjects: {}
