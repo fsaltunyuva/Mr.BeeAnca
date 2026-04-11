@@ -13,6 +13,14 @@ public class Movement : MonoBehaviour
     [SerializeField] private GameObject winScreen, loseScreen;
     
     [SerializeField] private Animator playerAnimator;
+    [SerializeField] private TextMeshProUGUI movementCounterText; // UI'daki text objesi
+    
+    public float movementCounter; // Sürekli artacak olan değer
+    public float counterIncreaseRate = 1f; // Saniyede ne kadar artacağı
+    
+    public bool canMove = true;
+
+    public bool isOnEndPoint = false;
     
     void Start() 
     {
@@ -22,11 +30,30 @@ public class Movement : MonoBehaviour
     
     void Update() 
     {
+        if (!canMove) 
+        {
+            movement = Vector2.zero;
+            return;
+        }
+        
         movement = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        
+        if (movement.sqrMagnitude > 0.01f) 
+        {
+            // Zamanla ve belirlediğin hızla artar
+            movementCounter += counterIncreaseRate * Time.deltaTime;
+            movementCounterText.text = $"{movementCounter:F1}"; // UI'ı güncelle
+        }
     }
     
     void FixedUpdate() 
     {
+        if (!canMove)
+        {
+            rb.velocity = Vector2.zero;
+            return;
+        }
+        
         rb.velocity = movement * speed * Time.fixedDeltaTime;
 
         if (movement != Vector2.zero) 
@@ -46,11 +73,25 @@ public class Movement : MonoBehaviour
         else if (other.CompareTag("Traffic Low Friction")) {
             speed = _intialSpeed * 0.75f;
         }
+        
+        if(other.CompareTag("End Point")) {
+            isOnEndPoint = true;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other) {
         if (other.CompareTag("Traffic Mid Friction") || other.CompareTag("Traffic High Friction") || other.CompareTag("Traffic Low Friction")) {
             speed = _intialSpeed;
         }
+        
+        if (other.CompareTag("End Point")) {
+            isOnEndPoint = false;
+        }
+    }
+    
+    public void ResetMovementCounter()
+    {
+        movementCounter = 0f;
+        movementCounterText.text = $"{movementCounter:F1}";
     }
 }
