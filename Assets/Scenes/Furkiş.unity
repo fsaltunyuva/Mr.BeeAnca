@@ -5741,7 +5741,7 @@ MonoBehaviour:
   innerTrail: {fileID: 289936851}
   tutorialEndScreen: {fileID: 1841010353}
   anlasildiButton: {fileID: 739221735}
-  goalMoney: 100
+  goalMoney: 300
   winScreen: {fileID: 1991520602}
   loseScreen: {fileID: 1479673589}
 --- !u!4 &588935104
@@ -19900,7 +19900,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: Artik ise baslamaya hazirsin, git ve para kazan, yoksa yazacagim bir AI
-    promptuyla isini yok ederim. 5 rota isteginden sonra <color=green>X$</color>
+    promptuyla isini yok ederim. 5 rota isteginden sonra <color=green>300$</color>
     kazanmis ol!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c3ccfa417e2c159419bf6ce4b6531914, type: 2}
@@ -19928,8 +19928,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22.5
-  m_fontSizeBase: 22.5
+  m_fontSize: 21.55
+  m_fontSizeBase: 21.55
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
