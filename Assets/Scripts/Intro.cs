@@ -14,7 +14,10 @@ public class Intro : MonoBehaviour
         "Uygulamanin adindan da anlayacagin uzere, su anda harita uygulamasinin icindeyiz.",
         "Ancak insanlarin zannettigi gibi en iyi rotayi veren bir algoritmamiz yok, hicbir zaman da olmadi.",
         "Bu yuzden, her rota istegini sen olusturup, kullanicilara yollayacaksin.",
-        "Senin gibi bir ucuz isci varken, kimin gelismis algoritmalara ihtiyaci var ki?"
+        "Senin gibi bir ucuz isci varken, kimin gelismis algoritmalara ihtiyaci var ki?",
+        "Ancak unutma, kazandigimiz para senin rotayi olusturma suren ve rotanin uzunluguna bagli olacak, kafana gore rota olusturamazsin.",
+        "Bazı kullanicilar rotalarina duraklar eklemek isteyebilir, bu yuzden onlari da dusunmen lazım.",
+        "Simdi senin kalin kafan icin biraz pratik yapma zamani."
     };
     
     void Start()

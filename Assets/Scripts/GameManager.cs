@@ -49,6 +49,11 @@ public class GameManager : MonoBehaviour
         currentRequestDialogueText.text = activeRequest.dialogue;
         player.transform.position = activeRequest.startPoint.position;
         movement.canMove = true;
+
+        // TODO: Maybe some additional info can be added to these because they are empty at the moment when drawing for a request
+        calculationText.text = "";
+        calculationText2.text = "";
+        
         timer.StartTimer();
     }
 
