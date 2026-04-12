@@ -188,7 +188,7 @@ public class GameManager : MonoBehaviour
     public void AddMoney(float amount)
     {
         totalMoney += amount;
-        totalMoneyText.text = $"{totalMoney}";
+        totalMoneyText.text = $"{totalMoney:F1}";
     }
     
     public void StartTrail()
@@ -207,5 +207,11 @@ public class GameManager : MonoBehaviour
     {
         outerTrail.Clear();
         innerTrail.Clear();
+    }
+    
+    public void RestartGame()
+    {
+        Time.timeScale = 1f;
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 }
