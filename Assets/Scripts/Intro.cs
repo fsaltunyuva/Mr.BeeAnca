@@ -12,10 +12,10 @@ public class Intro : MonoBehaviour
     {
         "Selam Bee Anca, Noodle Maps'teki ilk is gunune hosgeldin.",
         "Uygulamanin adindan da anlayacagin uzere, su anda harita uygulamasinin icindeyiz.",
-        "Ancak insanlarin zannettigi gibi en iyi rotayi veren bir algoritmamiz yok, hicbir zaman da olmadi.",
+        "Ancak insanlarin zannettigi gibi en iyi rotayi veren bir <shear>algoritmamiz</shear> yok, hicbir zaman da olmadi.",
         "Bu yuzden, her rota istegi geldiginde, rota olusturup kullanicilara yollayacaksin.",
-        "Senin gibi bir ucuz isci varken, kimin gelismis algoritmalara ihtiyaci var ki?",
-        "Ancak unutma, kazandigimiz para senin rotayi olusturma suren ve rotanin uzunluguna bagli olacak, kafana gore rota olusturamazsin.",
+        "Senin gibi bir <sketchy>ucuz isci</sketchy> varken, kimin gelismis algoritmalara ihtiyaci var ki?",
+        "Ancak unutma, kazandigimiz para senin <color=red>rotayi olusturma suren ve rotanin uzunluguna</color> bagli olacak, kafana gore rota olusturamazsin.",
         "Bazi kullanicilar rotalarina duraklar eklemek isteyebilir, bu yuzden onlari da dusunmen lazim.",
         "Simdi senin kalin kafan icin biraz pratik yapma zamani."
     };

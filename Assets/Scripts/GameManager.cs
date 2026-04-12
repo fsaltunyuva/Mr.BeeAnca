@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -38,6 +39,9 @@ public class GameManager : MonoBehaviour
     
     public GameObject tutorialEndScreen;
     public GameObject anlasildiButton;
+
+    public int goalMoney = 100;
+    public GameObject winScreen, loseScreen;
     
     void Start()
     {
@@ -47,7 +51,18 @@ public class GameManager : MonoBehaviour
     public void NewRequest()
     {
         // int randomIndex = UnityEngine.Random.Range(0, requests.Count); // TODO: Consider randomization later
+        try
+        {
         activeRequest = requests[currentRequestCounter++];
+
+        }
+        catch (Exception e)
+        {
+            if (totalMoney >= goalMoney)
+                StartCoroutine(DisplayWinScreen());
+            else
+                StartCoroutine(DisplayLoseScreen());
+        }
         
         activeRequest.gameObject.transform.gameObject.SetActive(true);
         currentRequestPortrait.sprite = activeRequest.portrait;
@@ -84,6 +99,20 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+    
+    IEnumerator DisplayWinScreen()
+    {
+        yield return new WaitForSeconds(2f);
+        Time.timeScale = 0f;
+        winScreen.SetActive(true);
+    }
+    
+    IEnumerator DisplayLoseScreen()
+    {
+        yield return new WaitForSeconds(2f);
+        Time.timeScale = 0f;
+        loseScreen.SetActive(true);
+    }
 
     public void ActivateAnlasildiButton()
     {
@@ -112,7 +141,7 @@ public class GameManager : MonoBehaviour
         calculationText.text = $"<color=white>Rota Ucreti: {activeRequest.requestPrice:F1}</color>\n" +
                                $"<color=red>Zaman Cezasi: -{timeTaken * timeConstant:F1}</color>\n" +
                                $"<color=red>Mesafe Cezasi: -{distancePoint * distanceConstant:F1}</color>";
-        calculationText2.text = $"<color=green>Kazanilan Para: {moneyEarned}</color>";
+        calculationText2.text = $"<color=green>Kazanilan Para: {moneyEarned:F1}</color>";
         
         // Deactivate current request
         activeRequest.gameObject.SetActive(false);
@@ -123,7 +152,7 @@ public class GameManager : MonoBehaviour
         // Stop trail when request is completed
         StopTrail();
 
-        if (currentRequestCounter == 4)
+        if (currentRequestCounter == 5)
             StartCoroutine(EndTutorial());
         else
             StartCoroutine(WaitSomeTimeAndStartNewRequest(3f));
