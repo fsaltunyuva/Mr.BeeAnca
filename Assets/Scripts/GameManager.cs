@@ -33,6 +33,10 @@ public class GameManager : MonoBehaviour
 
     public int currentRequestCounter = 0;
     
+    [Header("Trail Renderer")]
+    public TrailRenderer outerTrail;
+    public TrailRenderer innerTrail;
+    
     void Start()
     {
         NewRequest();
@@ -55,6 +59,10 @@ public class GameManager : MonoBehaviour
         calculationText2.text = "";
         
         timer.StartTimer();
+        
+        // Start trail when a new request is generated
+        ClearTrail();
+        StartTrail();
     }
 
     private void Update()
@@ -100,6 +108,9 @@ public class GameManager : MonoBehaviour
         movement.ResetMovementCounter();
         waypointPassCounterForCurrentRequest = 0;
         
+        // Stop trail when request is completed
+        StopTrail();
+        
         // Start a new request
         StartCoroutine(WaitSomeTimeAndStartNewRequest(3f));
     }
@@ -120,5 +131,23 @@ public class GameManager : MonoBehaviour
     {
         totalMoney += amount;
         totalMoneyText.text = $"{totalMoney}";
+    }
+    
+    public void StartTrail()
+    {
+        outerTrail.emitting = true;
+        innerTrail.emitting = true;
+    }
+    
+    public void StopTrail()
+    {
+        outerTrail.emitting = false;
+        innerTrail.emitting = false;
+    }
+    
+    public void ClearTrail()
+    {
+        outerTrail.Clear();
+        innerTrail.Clear();
     }
 }
