@@ -67,12 +67,15 @@ public class Movement : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("Traffic Mid Friction")) {
             speed = _intialSpeed * 0.5f;
+            SingletonMusic.Instance.PlaySFX("trafficJam_SFX");
         }
         else if (other.CompareTag("Traffic High Friction")) {
             speed = _intialSpeed * 0.25f;
+            SingletonMusic.Instance.PlaySFX("trafficJam_SFX");
         }
         else if (other.CompareTag("Traffic Low Friction")) {
             speed = _intialSpeed * 0.75f;
+            SingletonMusic.Instance.PlaySFX("trafficJam_SFX");
         }
         
         if(other.CompareTag("End Point")) {
@@ -81,6 +84,7 @@ public class Movement : MonoBehaviour
         
         if(other.CompareTag("Waypoint"))
         {
+            SingletonMusic.Instance.PlaySFX("waypoint_SFX");
             gameManager.waypointPassCounterForCurrentRequest++;
             Destroy(other.gameObject); // TODO: If you want to reuse requests, consider deactivating instead of destroying
         }
@@ -89,6 +93,7 @@ public class Movement : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other) {
         if (other.CompareTag("Traffic Mid Friction") || other.CompareTag("Traffic High Friction") || other.CompareTag("Traffic Low Friction")) {
             speed = _intialSpeed;
+            SingletonMusic.Instance.StopTrafficJamSFX();
         }
         
         if (other.CompareTag("End Point")) {

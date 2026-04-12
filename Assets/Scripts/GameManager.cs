@@ -65,6 +65,8 @@ public class GameManager : MonoBehaviour
         // Start trail when a new request is generated
         ClearTrail();
         StartTrail();
+        
+        SingletonMusic.Instance.PlaySFX("start_SFX");
     }
 
     private void Update()
@@ -78,6 +80,7 @@ public class GameManager : MonoBehaviour
             else
             {
                 calculationText.text = "<color=red>Henuz varis noktasina varmadin!</color>";
+                SingletonMusic.Instance.PlaySFX("waypointNotPassed_SFX");
             }
         }
     }
@@ -92,10 +95,12 @@ public class GameManager : MonoBehaviour
         if (waypointPassCounterForCurrentRequest != activeRequest.wayPoints.Count)
         {
             currentRequestDialogueText.text = "<color=red>Gecmen gereken duraklardan gecmedin!</color>";
+            SingletonMusic.Instance.PlaySFX("waypointNotPassed_SFX");
             StartCoroutine(WaitSomeTimeResetDialogue(3f));
             return;
         }
         
+        SingletonMusic.Instance.PlaySFX("arrival_SFX");
         movement.canMove = false;
         timer.StopTimer();
         
