@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -17,7 +16,7 @@ public class GameManager : MonoBehaviour
     
     [Header ("Scoring Constants")]
     public float timeConstant = 1f;
-    public float distanceConstant = 1f;
+    public float distanceConstant = 0.1f;
 
     public TextMeshProUGUI calculationText;
     public TextMeshProUGUI calculationText2;
@@ -36,6 +35,9 @@ public class GameManager : MonoBehaviour
     [Header("Trail Renderer")]
     public TrailRenderer outerTrail;
     public TrailRenderer innerTrail;
+    
+    public GameObject tutorialEndScreen;
+    public GameObject anlasildiButton;
     
     void Start()
     {
@@ -75,16 +77,21 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                calculationText.text = "<color=red>You haven't reached the destination yet!</color>";
+                calculationText.text = "<color=red>Henuz varis noktasina varmadin!</color>";
             }
         }
+    }
+
+    public void ActivateAnlasildiButton()
+    {
+        anlasildiButton.SetActive(true);
     }
     
     public void ProcessRecommendedWay()
     {
         if (waypointPassCounterForCurrentRequest != activeRequest.wayPoints.Count)
         {
-            currentRequestDialogueText.text = "<color=red>You haven't passed through all the waypoints yet!</color>";
+            currentRequestDialogueText.text = "<color=red>Gecmen gereken duraklardan gecmedin!</color>";
             StartCoroutine(WaitSomeTimeResetDialogue(3f));
             return;
         }
@@ -94,13 +101,13 @@ public class GameManager : MonoBehaviour
         
         float timeTaken = timer.elapsedTime;
         float distancePoint = movement.movementCounter;
-        float moneyEarned = Mathf.Max(0, activeRequest.requestPrice - timeTaken * timeConstant - distancePoint * 0.1f);
+        float moneyEarned = Mathf.Max(0, activeRequest.requestPrice - timeTaken * timeConstant - distancePoint * distanceConstant);
         AddMoney(moneyEarned);
         
-        calculationText.text = $"<color=white>Actual Price: {activeRequest.requestPrice:F1}</color>\n" +
-                               $"<color=red>Time Penalty: {timeTaken * timeConstant:F1}</color>\n" +
-                               $"<color=red>Distance Penalty: {distancePoint * 0.1f:F1}</color>";
-        calculationText2.text = $"<color=green>Money Earned: {moneyEarned}</color>";
+        calculationText.text = $"<color=white>Rota Ucreti: {activeRequest.requestPrice:F1}</color>\n" +
+                               $"<color=red>Zaman Cezasi: -{timeTaken * timeConstant:F1}</color>\n" +
+                               $"<color=red>Mesafe Cezasi: -{distancePoint * distanceConstant:F1}</color>";
+        calculationText2.text = $"<color=green>Kazanilan Para: {moneyEarned}</color>";
         
         // Deactivate current request
         activeRequest.gameObject.SetActive(false);
@@ -110,9 +117,12 @@ public class GameManager : MonoBehaviour
         
         // Stop trail when request is completed
         StopTrail();
-        
-        // Start a new request
-        StartCoroutine(WaitSomeTimeAndStartNewRequest(3f));
+
+        if (currentRequestCounter == 4)
+            StartCoroutine(EndTutorial());
+        else
+            StartCoroutine(WaitSomeTimeAndStartNewRequest(3f));
+
     }
     
     IEnumerator WaitSomeTimeAndStartNewRequest(float waitTime)
@@ -125,6 +135,20 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime);
         currentRequestDialogueText.text = activeRequest.dialogue;
+    }
+
+    IEnumerator EndTutorial()
+    {
+        yield return new WaitForSeconds(4f);
+        Time.timeScale = 0f;
+        tutorialEndScreen.SetActive(true);
+    }
+    
+    public void AcceptEndTutorial()
+    {
+        Time.timeScale = 1f;
+        tutorialEndScreen.SetActive(false);
+        StartCoroutine(WaitSomeTimeAndStartNewRequest(1f));
     }
     
     public void AddMoney(float amount)
